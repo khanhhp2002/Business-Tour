@@ -28,7 +28,10 @@ public class Player : MonoBehaviour
         _playerMovement.MoveToTile(tile);
         SetNewOccuiedTile(tile);
     }
-
+    public void MoveAround()
+    {
+        _playerMovement.MoveAround(_occupiedTile.TileIndex, SetNewOccuiedTile);
+    }
     private void SetNewOccuiedTile(TileBase tile)
     {
         _occupiedTile = tile;

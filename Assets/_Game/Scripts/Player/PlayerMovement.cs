@@ -4,40 +4,61 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private float _moveDelayTime;
+
+    private bool _isMoving = false;
     public void MoveWithDice(int value, int currentTileIndex, bool isPair, Action<TileBase> onEndMoving)
     {
+        if (_isMoving) return;
+        _isMoving = true;
         StartCoroutine(MoveWithDice(value, currentTileIndex, onEndMoving));
     }
-
     IEnumerator MoveWithDice(int value, int currentTileIndex, Action<TileBase> onEndMoving)
     {
-        int step = 0;
-        while (step < value)
+        while (0 < value--)
         {
-            step++;
-            int tempTileIndex = currentTileIndex + step;
-            if (tempTileIndex == TileManager.Instance.TilesCount)
-            {
-                step = 0;
-                currentTileIndex = 0;
-                tempTileIndex = 0;
-                value -= step;
-            }
-            Vector3 newPosition = TileManager.Instance.GetTile(tempTileIndex).transform.position;
-            newPosition.y += 0.5f;
-            transform.position = newPosition;
-            yield return new WaitForSeconds(0.5f);
+            MoveToTile(ref currentTileIndex);
+            yield return new WaitForSeconds(_moveDelayTime);
         }
-        onEndMoving?.Invoke(TileManager.Instance.GetTile(currentTileIndex + step));
+        onEndMoving?.Invoke(TileManager.Instance.GetTile(currentTileIndex));
+        _isMoving = false;
     }
-
+    public void MoveToTile(ref int tileIndex)
+    {
+        tileIndex++;
+        if (tileIndex == TileManager.Instance.TilesCount) tileIndex = 0;
+        Vector3 newPosition = TileManager.Instance.GetTile(tileIndex).transform.position;
+        newPosition.y += 0.5f;
+        transform.position = newPosition;
+    }
     public void MoveToTile(TileBase tile)
     {
         transform.position = tile.transform.position;
     }
 
-    public void MoveAround()
+    public void MoveAround(int originTileIndex, Action<TileBase> onEndMoving)
     {
+        if (_isMoving) return;
+        _isMoving = true;
+        StartCoroutine(MoveAroundCo(originTileIndex, onEndMoving));
+    }
+    IEnumerator MoveAroundCo(int originTileIndex, Action<TileBase> onEndMoving)
+    {
+        bool movedOneRound = false;
+        int currentTileIndex = originTileIndex;
+        while (!movedOneRound)
+        {
+            MoveToTile(ref currentTileIndex);
+            yield return new WaitForSeconds(_moveDelayTime);
+            if (currentTileIndex == originTileIndex) movedOneRound = true;
+        }
+        while (currentTileIndex != 0)
+        {
+            MoveToTile(ref currentTileIndex);
+            yield return new WaitForSeconds(_moveDelayTime);
+        }
+        onEndMoving.Invoke(TileManager.Instance.GetTile(currentTileIndex));
+        _isMoving = false;
 
     }
 }
