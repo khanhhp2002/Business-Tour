@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -7,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _moveDelayTime;
 
     private bool _isMoving = false;
+    private float _yOffset = 0.075f;
     public void MoveWithDice(int value, int currentTileIndex, bool isPair, Action<TileBase> onEndMoving)
     {
         if (_isMoving) return;
@@ -27,9 +29,11 @@ public class PlayerMovement : MonoBehaviour
     {
         tileIndex++;
         if (tileIndex == TileManager.Instance.TilesCount) tileIndex = 0;
-        Vector3 newPosition = TileManager.Instance.GetTile(tileIndex).transform.position;
+        Transform temp = TileManager.Instance.GetTile(tileIndex).transform;
+        Vector3 newPosition = temp.position;
         newPosition.y += 0.5f;
         transform.position = newPosition;
+        temp.DOMoveY(temp.position.y - _yOffset, _moveDelayTime / 2f).SetLoops(2, LoopType.Yoyo);
     }
     public void MoveToTile(TileBase tile)
     {
