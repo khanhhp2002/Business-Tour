@@ -12,4 +12,9 @@ public abstract class TileBase : MonoBehaviour
     {
 
     }
+
+    public virtual void OnMouseButtonDown()
+    {
+        Debug.Log("TileBase");
+    }
 }

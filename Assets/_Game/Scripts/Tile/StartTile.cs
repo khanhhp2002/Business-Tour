@@ -8,4 +8,9 @@ public class StartTile : TileBase
     {
         Debug.Log("StartTile");
     }
+
+    public override void OnMouseButtonDown()
+    {
+        Debug.Log("StartTile");
+    }
 }

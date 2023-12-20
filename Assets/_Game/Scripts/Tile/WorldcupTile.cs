@@ -8,4 +8,9 @@ public class WorldcupTile : TileBase
     {
         Debug.Log("WorldcupTile");
     }
+
+    public override void OnMouseButtonDown()
+    {
+        Debug.Log("WorldcupTile");
+    }
 }

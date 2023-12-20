@@ -8,4 +8,9 @@ public class BeachTile : TileBase
     {
         Debug.Log("BeachTile");
     }
+
+    public override void OnMouseButtonDown()
+    {
+        Debug.Log("BeachTile");
+    }
 }

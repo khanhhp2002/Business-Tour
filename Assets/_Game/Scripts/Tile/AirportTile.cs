@@ -8,4 +8,9 @@ public class AirportTile : TileBase
     {
         player.MoveToTile(TileManager.Instance.GetTile(0));
     }
+
+    public override void OnMouseButtonDown()
+    {
+        Debug.Log("AirportTile");
+    }
 }
