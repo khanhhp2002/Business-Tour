@@ -8,4 +8,9 @@ public class FortuneTile : TileBase
     {
         Debug.Log("FortuneTile");
     }
+
+    public override void OnMouseButtonDown()
+    {
+        Debug.Log("FortuneTile");
+    }
 }

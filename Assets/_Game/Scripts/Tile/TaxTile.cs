@@ -8,4 +8,9 @@ public class TaxTile : TileBase
     {
         Debug.Log("TaxTile");
     }
+
+    public override void OnMouseButtonDown()
+    {
+        Debug.Log("TaxTile");
+    }
 }

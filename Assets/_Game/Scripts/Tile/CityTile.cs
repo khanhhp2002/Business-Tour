@@ -8,4 +8,9 @@ public class CityTile : TileBase
     {
         Debug.Log("CityTile");
     }
+
+    public override void OnMouseButtonDown()
+    {
+        Debug.Log("CityTile");
+    }
 }
