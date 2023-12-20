@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -7,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _moveDelayTime;
 
     private bool _isMoving = false;
+    private float _yOffset = 0.075f;
     public void MoveWithDice(int value, int currentTileIndex, bool isPair, Action<TileBase> onEndMoving)
     {
         if (_isMoving) return;
@@ -15,21 +17,25 @@ public class PlayerMovement : MonoBehaviour
     }
     IEnumerator MoveWithDice(int value, int currentTileIndex, Action<TileBase> onEndMoving)
     {
+        TileBase destinationTile = FindDestination(currentTileIndex, value);
         while (0 < value--)
         {
             MoveToTile(ref currentTileIndex);
             yield return new WaitForSeconds(_moveDelayTime);
         }
-        onEndMoving?.Invoke(TileManager.Instance.GetTile(currentTileIndex));
+        onEndMoving?.Invoke(destinationTile);
+        TileManager.Instance.BlinkImage(destinationTile, false);
         _isMoving = false;
     }
     public void MoveToTile(ref int tileIndex)
     {
         tileIndex++;
         if (tileIndex == TileManager.Instance.TilesCount) tileIndex = 0;
-        Vector3 newPosition = TileManager.Instance.GetTile(tileIndex).transform.position;
+        Transform temp = TileManager.Instance.GetTile(tileIndex).transform;
+        Vector3 newPosition = temp.position;
         newPosition.y += 0.5f;
         transform.position = newPosition;
+        temp.DOMoveY(temp.position.y - _yOffset, _moveDelayTime / 2f).SetLoops(2, LoopType.Yoyo);
     }
     public void MoveToTile(TileBase tile)
     {
@@ -46,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
     {
         bool movedOneRound = false;
         int currentTileIndex = originTileIndex;
+        TileBase destinationTile = FindDestination(currentTileIndex);
         while (!movedOneRound)
         {
             MoveToTile(ref currentTileIndex);
@@ -57,8 +64,23 @@ public class PlayerMovement : MonoBehaviour
             MoveToTile(ref currentTileIndex);
             yield return new WaitForSeconds(_moveDelayTime);
         }
-        onEndMoving.Invoke(TileManager.Instance.GetTile(currentTileIndex));
+        onEndMoving.Invoke(destinationTile);
+        TileManager.Instance.BlinkImage(destinationTile, false);
         _isMoving = false;
 
+    }
+    private TileBase FindDestination(int originTileIndex, int value = 0)
+    {
+        TileBase destinationTile;
+        if (value == 0)
+        {
+            destinationTile = TileManager.Instance.GetTile(value);
+        }
+        else
+        {
+            destinationTile = TileManager.Instance.GetTile((originTileIndex + value) % TileManager.Instance.TilesCount);
+        }
+        TileManager.Instance.BlinkImage(destinationTile, true);
+        return destinationTile;
     }
 }
