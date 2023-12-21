@@ -5,7 +5,7 @@ using UnityEngine;
 public class TileManager : Singleton<TileManager>
 {
     [SerializeField] private TileBase[] tiles;
-
+    [SerializeField] private Building[] buildings;
     //event
     public Action<TileBase> OnTileClicked;
 
@@ -13,6 +13,10 @@ public class TileManager : Singleton<TileManager>
     public TileBase GetTile(int index)
     {
         return tiles[index];
+    }
+    public Building GetBuilding(int index)
+    {
+        return buildings[index];
     }
     public void BlinkImage(TileBase tile, bool canBlink)
     {
