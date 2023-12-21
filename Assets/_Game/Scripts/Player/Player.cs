@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     [SerializeField] private TileBase _occupiedTile;
     [SerializeField] private PlayerMovement _playerMovement;
     [SerializeField] private PlayerInput _playerInput;
-
+    [SerializeField] private PlayerColor _playerColor;
     public PlayerInput PlayerInput => _playerInput;
 
     private Stack<PlayerTaskType> playerTasks = new Stack<PlayerTaskType>();

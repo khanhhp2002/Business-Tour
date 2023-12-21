@@ -11,6 +11,8 @@ public class WorldcupTile : TileBase
 
     public override void OnMouseButtonDown()
     {
+        // show current city that organized worldcup
         Debug.Log("WorldcupTile");
+        TileManager.Instance.OnTileClicked?.Invoke(this);
     }
 }

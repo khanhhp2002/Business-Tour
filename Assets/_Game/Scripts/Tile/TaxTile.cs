@@ -11,6 +11,8 @@ public class TaxTile : TileBase
 
     public override void OnMouseButtonDown()
     {
+        // Show the total tax that each player already paid on this game
         Debug.Log("TaxTile");
+        TileManager.Instance.OnTileClicked?.Invoke(this);
     }
 }

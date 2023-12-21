@@ -1,9 +1,13 @@
 using DG.Tweening;
+using System;
 using UnityEngine;
 
 public class TileManager : Singleton<TileManager>
 {
     [SerializeField] private TileBase[] tiles;
+
+    //event
+    public Action<TileBase> OnTileClicked;
 
     private Tween _blinkTween;
     public TileBase GetTile(int index)
