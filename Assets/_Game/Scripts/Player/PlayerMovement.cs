@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
         Transform temp = TileManager.Instance.GetTile(tileIndex).transform;
         Vector3 newPosition = temp.position;
         newPosition.y += 0.5f;
-        transform.position = newPosition;
+        transform.DOJump(newPosition, 1f, 1, _moveDelayTime);
         temp.DOMoveY(temp.position.y - _yOffset, _moveDelayTime / 2f).SetLoops(2, LoopType.Yoyo);
     }
     public void MoveToTile(TileBase tile)
