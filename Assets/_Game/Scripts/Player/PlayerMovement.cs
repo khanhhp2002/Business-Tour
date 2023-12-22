@@ -27,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
         TileManager.Instance.BlinkImage(destinationTile, false);
         _isMoving = false;
     }
+
     public void MoveToTile(ref int tileIndex)
     {
         tileIndex++;
@@ -34,8 +35,8 @@ public class PlayerMovement : MonoBehaviour
         Transform temp = TileManager.Instance.GetTile(tileIndex).transform;
         Vector3 newPosition = temp.position;
         newPosition.y += 0.5f;
-        transform.transform.DOJump(newPosition, 1f, 1, _moveDelayTime);
-        temp.DOMoveY(temp.position.y - _yOffset, _moveDelayTime / 2f).SetLoops(2, LoopType.Yoyo);
+        transform.transform.DOJump(newPosition, 1f, 1, _moveDelayTime / 2f)
+            .OnComplete(() => temp.DOMoveY(temp.position.y - _yOffset, _moveDelayTime / 2f).SetLoops(2, LoopType.Yoyo));
     }
     public void MoveToTile(TileBase tile)
     {

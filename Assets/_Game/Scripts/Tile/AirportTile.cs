@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AirportTile : TileBase
@@ -11,6 +9,8 @@ public class AirportTile : TileBase
 
     public override void OnMouseButtonDown()
     {
+        // Show the last turn that you traveled to this airport tile
         Debug.Log("AirportTile");
+        TileManager.Instance.OnTileClicked?.Invoke(this);
     }
 }

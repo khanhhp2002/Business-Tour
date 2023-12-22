@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     [SerializeField] private TileBase _occupiedTile;
     [SerializeField] private PlayerMovement _playerMovement;
     [SerializeField] private PlayerInput _playerInput;
-
+    [SerializeField] private PlayerColor _playerColor;
     public PlayerInput PlayerInput => _playerInput;
 
     private Stack<PlayerTaskType> playerTasks = new Stack<PlayerTaskType>();
@@ -34,6 +34,9 @@ public class Player : MonoBehaviour
         {
             case PlayerTaskType.RollDice:
                 _playerInput.SetState(new RollDiceState());
+                break;
+            case PlayerTaskType.BuyProperty:
+                _playerInput.SetState(new BuyPropertyState());
                 break;
             default:
                 break;
@@ -74,6 +77,19 @@ public class Player : MonoBehaviour
         _playerMovement.MoveToTile(tile);
         SetNewOccuiedTile(tile);
     }
+
+    public void BuyProperty(int level)
+    {
+        (_occupiedTile as CityTile).CreateProperty(level, _playerColor);
+        Invoke(nameof(OnEndTask), 1f);
+    }
+
+    public void UpgradeProperty()
+    {
+        (_occupiedTile as CityTile).UpgradeProperty();
+        Invoke(nameof(OnEndTask), 1f);
+    }
+
     public void MoveAround()
     {
         _playerMovement.MoveAround(_occupiedTile.TileIndex, SetNewOccuiedTile);
@@ -82,6 +98,8 @@ public class Player : MonoBehaviour
     {
         _occupiedTile = tile;
         _occupiedTile.OnPlayerEnter(this);
+        var cityTile = _occupiedTile as CityTile;
+        if (cityTile != null) playerTasks.Push(PlayerTaskType.BuyProperty);
         Invoke(nameof(OnEndTask), 1f);
     }
 }

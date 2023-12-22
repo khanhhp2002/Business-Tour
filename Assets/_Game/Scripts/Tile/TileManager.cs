@@ -1,14 +1,22 @@
 using DG.Tweening;
+using System;
 using UnityEngine;
 
 public class TileManager : Singleton<TileManager>
 {
     [SerializeField] private TileBase[] tiles;
+    [SerializeField] private Building[] buildings;
+    //event
+    public Action<TileBase> OnTileClicked;
 
     private Tween _blinkTween;
     public TileBase GetTile(int index)
     {
         return tiles[index];
+    }
+    public Building GetBuilding(int index)
+    {
+        return buildings[index];
     }
     public void BlinkImage(TileBase tile, bool canBlink)
     {
