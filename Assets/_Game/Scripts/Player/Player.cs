@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
     {
         Debug.Log("OnStartTurn");
         playerTasks.Push(PlayerTaskType.RollDice);
-        GameplayManager.Instance.ChangeToNextState();
+        Invoke(nameof(OnGetTask), 1f);
     }
 
     public void OnGetTask()
@@ -39,13 +39,12 @@ public class Player : MonoBehaviour
                 break;
         }
     }
-
     private void OnEndTask()
     {
         Debug.Log("OnEndTask");
         if (playerTasks.Count == 0)
         {
-            GameplayManager.Instance.ChangeToNextState();
+            Invoke(nameof(OnEndTurn), 1f);
         }
         else
         {
@@ -56,7 +55,7 @@ public class Player : MonoBehaviour
     public void OnEndTurn()
     {
         Debug.Log("OnEndTurn");
-        GameplayManager.Instance.ChangeToNextState();
+        GameplayManager.Instance.ChangePlayer();
     }
 
     public void MoveWithDice()
