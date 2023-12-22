@@ -10,7 +10,7 @@ public class RollDiceState : IPlayerInputState
 
     public void OnExecute(Player player)
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || _timer <= 0)
         {
             player.MoveWithDice();
             player.PlayerInput.SetState(new EmptyState());
