@@ -8,9 +8,11 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerMovement _playerMovement;
     [SerializeField] private PlayerInput _playerInput;
     [SerializeField] private PlayerColor _playerColor;
-    public PlayerInput PlayerInput => _playerInput;
 
     private Stack<PlayerTaskType> playerTasks = new Stack<PlayerTaskType>();
+
+    public PlayerInput PlayerInput => _playerInput;
+
 
     private void Start()
     {
@@ -98,8 +100,24 @@ public class Player : MonoBehaviour
     {
         _occupiedTile = tile;
         _occupiedTile.OnPlayerEnter(this);
-        var cityTile = _occupiedTile as CityTile;
-        if (cityTile != null) playerTasks.Push(PlayerTaskType.BuyProperty);
+
         Invoke(nameof(OnEndTask), 1f);
+    }
+    private void CheckTileStatus(TileBase tile)
+    {
+        switch (tile.TileType)
+        {
+            case TileType.CityTile:
+                CityTile temp = tile as CityTile;
+                if (temp.Property == null)
+                    playerTasks.Push(PlayerTaskType.BuyProperty);
+                else if (temp.OwnerColor == this._playerColor)
+                    playerTasks.Push(PlayerTaskType.UpgradeProperty);
+                else
+                    playerTasks.Push(PlayerTaskType.PayRent);
+                break;
+            default:
+                return;
+        }
     }
 }

@@ -637,6 +637,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tileIndex: 0
   _imageSprite: {fileID: 82476218}
+  _tileType: 6
 --- !u!1 &131326848
 GameObject:
   m_ObjectHideFlags: 0
@@ -809,6 +810,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tileIndex: 17
   _imageSprite: {fileID: 134434814}
+  _tileType: 1
 --- !u!1 &164409984
 GameObject:
   m_ObjectHideFlags: 0
@@ -1268,6 +1270,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tileIndex: 12
   _imageSprite: {fileID: 224811096}
+  _tileType: 3
 --- !u!1 &260692102
 GameObject:
   m_ObjectHideFlags: 0
@@ -1633,6 +1636,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tileIndex: 13
   _imageSprite: {fileID: 357868318}
+  _tileType: 1
 --- !u!1 &364680041
 GameObject:
   m_ObjectHideFlags: 0
@@ -1733,6 +1737,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tileIndex: 19
   _imageSprite: {fileID: 364680042}
+  _tileType: 1
 --- !u!1 &369456772
 GameObject:
   m_ObjectHideFlags: 0
@@ -1833,6 +1838,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tileIndex: 4
   _imageSprite: {fileID: 369456773}
+  _tileType: 2
 --- !u!1 &394257060
 GameObject:
   m_ObjectHideFlags: 0
@@ -1933,6 +1939,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tileIndex: 5
   _imageSprite: {fileID: 394257061}
+  _tileType: 1
 --- !u!1 &395589211
 GameObject:
   m_ObjectHideFlags: 0
@@ -2648,6 +2655,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tileIndex: 28
   _imageSprite: {fileID: 511015388}
+  _tileType: 3
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -2916,6 +2924,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tileIndex: 30
   _imageSprite: {fileID: 534351097}
+  _tileType: 8
 --- !u!1 &541161968
 GameObject:
   m_ObjectHideFlags: 0
@@ -3016,6 +3025,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tileIndex: 21
   _imageSprite: {fileID: 541161969}
+  _tileType: 1
 --- !u!1 &595592149
 GameObject:
   m_ObjectHideFlags: 0
@@ -3116,6 +3126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tileIndex: 2
   _imageSprite: {fileID: 595592150}
+  _tileType: 1
 --- !u!1 &606360218
 GameObject:
   m_ObjectHideFlags: 0
@@ -3216,6 +3227,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tileIndex: 9
   _imageSprite: {fileID: 606360219}
+  _tileType: 1
 --- !u!1 &656016400
 GameObject:
   m_ObjectHideFlags: 0
@@ -3460,6 +3472,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tileIndex: 20
   _imageSprite: {fileID: 718267124}
+  _tileType: 3
 --- !u!1 &732784402
 GameObject:
   m_ObjectHideFlags: 0
@@ -3560,6 +3573,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tileIndex: 27
   _imageSprite: {fileID: 732784403}
+  _tileType: 1
 --- !u!1 &754754102
 GameObject:
   m_ObjectHideFlags: 0
@@ -3660,6 +3674,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tileIndex: 29
   _imageSprite: {fileID: 754754103}
+  _tileType: 1
 --- !u!1 &776894484
 GameObject:
   m_ObjectHideFlags: 0
@@ -4038,6 +4053,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tileIndex: 24
   _imageSprite: {fileID: 810362042}
+  _tileType: 7
 --- !u!1 &828666095
 GameObject:
   m_ObjectHideFlags: 0
@@ -4138,6 +4154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tileIndex: 25
   _imageSprite: {fileID: 828666096}
+  _tileType: 1
 --- !u!1 &857901697
 GameObject:
   m_ObjectHideFlags: 0
@@ -4382,6 +4399,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tileIndex: 6
   _imageSprite: {fileID: 876791094}
+  _tileType: 1
 --- !u!1 &903684849
 GameObject:
   m_ObjectHideFlags: 0
@@ -4482,6 +4500,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tileIndex: 23
   _imageSprite: {fileID: 903684850}
+  _tileType: 1
 --- !u!1 &932654742
 GameObject:
   m_ObjectHideFlags: 0
@@ -4747,6 +4766,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tileIndex: 1
   _imageSprite: {fileID: 970392974}
+  _tileType: 1
 --- !u!1 &994545186
 GameObject:
   m_ObjectHideFlags: 0
@@ -4991,6 +5011,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tileIndex: 18
   _imageSprite: {fileID: 1072733390}
+  _tileType: 2
 --- !u!1 &1109032542
 GameObject:
   m_ObjectHideFlags: 0
@@ -5091,6 +5112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tileIndex: 7
   _imageSprite: {fileID: 1109032543}
+  _tileType: 1
 --- !u!1 &1137676914
 GameObject:
   m_ObjectHideFlags: 0
@@ -5347,6 +5369,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tileIndex: 22
   _imageSprite: {fileID: 1194916357}
+  _tileType: 1
 --- !u!1 &1202608231
 GameObject:
   m_ObjectHideFlags: 0
@@ -5447,6 +5470,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tileIndex: 31
   _imageSprite: {fileID: 1202608232}
+  _tileType: 1
 --- !u!1 &1217427381
 GameObject:
   m_ObjectHideFlags: 0
@@ -5619,6 +5643,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tileIndex: 11
   _imageSprite: {fileID: 1314425729}
+  _tileType: 1
 --- !u!1 &1326028990
 GameObject:
   m_ObjectHideFlags: 0
@@ -5920,6 +5945,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tileIndex: 16
   _imageSprite: {fileID: 1326924211}
+  _tileType: 5
 --- !u!1 &1327613467
 GameObject:
   m_ObjectHideFlags: 0
@@ -6164,6 +6190,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tileIndex: 15
   _imageSprite: {fileID: 1349462885}
+  _tileType: 1
 --- !u!1 &1359549162
 GameObject:
   m_ObjectHideFlags: 0
@@ -7668,6 +7695,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tileIndex: 10
   _imageSprite: {fileID: 1991390615}
+  _tileType: 1
 --- !u!1 &2017748963
 GameObject:
   m_ObjectHideFlags: 0
@@ -7840,6 +7868,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tileIndex: 26
   _imageSprite: {fileID: 2025885908}
+  _tileType: 2
 --- !u!1 &2040889762
 GameObject:
   m_ObjectHideFlags: 0
@@ -8051,6 +8080,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tileIndex: 3
   _imageSprite: {fileID: 2050069489}
+  _tileType: 1
 --- !u!1 &2111084865
 GameObject:
   m_ObjectHideFlags: 0
@@ -8269,6 +8299,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tileIndex: 14
   _imageSprite: {fileID: 2112652703}
+  _tileType: 2
 --- !u!1 &2140570063
 GameObject:
   m_ObjectHideFlags: 0
@@ -8370,3 +8401,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tileIndex: 8
   _imageSprite: {fileID: 2140570064}
+  _tileType: 4

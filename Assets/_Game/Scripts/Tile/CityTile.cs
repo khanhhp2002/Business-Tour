@@ -6,6 +6,10 @@ public class CityTile : TileBase
     private PlayerColor _ownerColor;
     private int _level;
     private Building _property;
+
+    public Building Property { get => _property; }
+    public PlayerColor OwnerColor { get => _ownerColor; }
+
     public override void OnPlayerEnter(Player player)
     {
         Debug.Log("CityTile");
@@ -20,10 +24,13 @@ public class CityTile : TileBase
 
     public void CreateProperty(int level, PlayerColor playerColor)
     {
-        _ownerColor = playerColor;
+        bool canFlip = this.ImageSprite.flipX;
         _property = Instantiate(TileManager.Instance.GetBuilding(level - 1), transform);
-        _property.transform.localPosition = new Vector3(0.25f, 0.6f, 0f);
-
+        Vector3 temp = Property.transform.localPosition;
+        Property.SpRender.flipX = canFlip;
+        //_ownerColor = playerColor;
+        Property.transform.localPosition = (canFlip) ? new Vector3(-temp.x, temp.y, temp.z) : new Vector3(temp.x, temp.y, temp.z);
+        _level = level;
     }
 
     public void UpgradeProperty()
