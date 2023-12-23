@@ -6,9 +6,19 @@ public class TileManager : Singleton<TileManager>
 {
     [SerializeField] private TileBase[] tiles;
     [SerializeField] private Building[] buildings;
+    [SerializeField] private AirportTile _airport;
+    [SerializeField] private StartTile _start;
+    [SerializeField] private WorldcupTile _worldCup;
+    [SerializeField] private IslandTile _island;
+    [SerializeField] private TaxTile _tax;
+
+    public AirportTile Airport { get => _airport; }
+    public StartTile Start { get => _start; }
+    public WorldcupTile WorldCup { get => _worldCup; }
+    public IslandTile Island { get => _island; }
+    public TaxTile Tax { get => _tax; }
     //event
     public Action<TileBase> OnTileClicked;
-
     private Tween _blinkTween;
     public TileBase GetTile(int index)
     {
@@ -30,4 +40,6 @@ public class TileManager : Singleton<TileManager>
         }
     }
     public int TilesCount => tiles.Length;
+
+
 }

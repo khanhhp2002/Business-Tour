@@ -3,7 +3,7 @@ using UnityEngine;
 public class RollDiceState : IPlayerInputState
 {
     private float _timer = 0f;
-    public void OnInitialize(Player player)
+    public void OnEnter(Player player)
     {
         _timer = 10f;
     }
@@ -14,6 +14,12 @@ public class RollDiceState : IPlayerInputState
         {
             player.MoveWithDice();
             player.PlayerInput.SetState(new EmptyState());
+        }
+        else if (Input.GetKeyDown(KeyCode.A))
+        {
+            player.PlayerMovement.MoveToTile(TileManager.Instance.Airport);
+            player.SetNewOccuiedTile(TileManager.Instance.Airport);
+
         }
         _timer -= Time.deltaTime;
     }

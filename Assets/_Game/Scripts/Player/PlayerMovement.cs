@@ -27,7 +27,6 @@ public class PlayerMovement : MonoBehaviour
         TileManager.Instance.BlinkImage(destinationTile, false);
         _isMoving = false;
     }
-
     public void MoveToTile(ref int tileIndex)
     {
         tileIndex++;
@@ -42,7 +41,6 @@ public class PlayerMovement : MonoBehaviour
     {
         transform.position = tile.transform.position;
     }
-
     public void MoveAround(int originTileIndex, Action<TileBase> onEndMoving)
     {
         if (_isMoving) return;

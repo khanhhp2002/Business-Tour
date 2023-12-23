@@ -3,11 +3,12 @@ using UnityEngine;
 public class BuyPropertyState : IPlayerInputState
 {
     private float _timer = 0f;
-    private Player _player;
-    public void OnInitialize(Player player)
+    private Player _thisPlayer;
+
+    public void OnEnter(Player player)
     {
         _timer = 20f;
-        _player = player;
+        _thisPlayer = player;
         BuyPropertyUI.Instance.onPurchase += OnPurchase;
         BuyPropertyUI.Instance.Show();
     }
@@ -29,7 +30,7 @@ public class BuyPropertyState : IPlayerInputState
 
     private void OnPurchase(int buildingLevel)
     {
-        _player.BuyProperty(buildingLevel);
-        _player.PlayerInput.SetState(new EmptyState());
+        _thisPlayer.BuyProperty(buildingLevel);
+        _thisPlayer.PlayerInput.SetState(new EmptyState());
     }
 }

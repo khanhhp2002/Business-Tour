@@ -6,5 +6,6 @@ public enum PlayerTaskType : byte
     UpgradeProperty = 3,
     PayRent = 4,
     PayTax = 5,
-    ChooseProperty = 6
+    ChooseProperty = 6,
+    FlyToTile = 7,
 }

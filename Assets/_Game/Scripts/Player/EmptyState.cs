@@ -1,6 +1,6 @@
 public class EmptyState : IPlayerInputState
 {
-    public void OnInitialize(Player player)
+    public void OnEnter(Player player)
     {
 
     }
