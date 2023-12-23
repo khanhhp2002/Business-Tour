@@ -98,9 +98,9 @@ public class Player : MonoBehaviour
     }
     private void SetNewOccuiedTile(TileBase tile)
     {
+        CheckTileStatus(tile);
         _occupiedTile = tile;
         _occupiedTile.OnPlayerEnter(this);
-
         Invoke(nameof(OnEndTask), 1f);
     }
     private void CheckTileStatus(TileBase tile)
