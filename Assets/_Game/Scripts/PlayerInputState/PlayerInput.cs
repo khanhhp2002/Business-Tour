@@ -17,7 +17,6 @@ public class PlayerInput : MonoBehaviour
             _currentState.OnExecute(_player);
         }
     }
-
     public void SetState(IPlayerInputState state)
     {
         if (_currentState != null)
@@ -25,6 +24,6 @@ public class PlayerInput : MonoBehaviour
             _currentState.OnExit(_player);
         }
         _currentState = state;
-        _currentState.OnInitialize(_player);
+        _currentState.OnEnter(_player);
     }
 }

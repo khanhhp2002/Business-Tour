@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 public class GameplayManager : Singleton<GameplayManager>
@@ -5,7 +6,6 @@ public class GameplayManager : Singleton<GameplayManager>
     private Queue<Player> _players = new Queue<Player>();
 
     private Player _currentPlayer;
-
     private void Start()
     {
         var player = FindFirstObjectByType<Player>();

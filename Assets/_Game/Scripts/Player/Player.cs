@@ -10,20 +10,26 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerColor _playerColor;
 
     private Stack<PlayerTaskType> playerTasks = new Stack<PlayerTaskType>();
-
+    private int _money;
+    public PlayerMovement PlayerMovement { get => _playerMovement; }
     public PlayerInput PlayerInput => _playerInput;
-
+    public PlayerColor PlayerColor { get => _playerColor; set => _playerColor = value; }
+    public int Money { get => _money; set => _money = value; }
 
     private void Start()
     {
-        _playerMovement = GetComponent<PlayerMovement>();
-        _playerInput = GetComponent<PlayerInput>();
+        OnInit();
     }
-
+    private void OnInit()
+    {
+        Money = 1000000;
+    }
     public void OnStartTurn()
     {
         Debug.Log("OnStartTurn");
         playerTasks.Push(PlayerTaskType.RollDice);
+        if (_occupiedTile.IsTileType(TileType.AirportTile))
+            playerTasks.Push(PlayerTaskType.FlyToTile); //ToDo: need to change into FlyToTile in future
         Invoke(nameof(OnGetTask), 1f);
     }
 
@@ -39,6 +45,9 @@ public class Player : MonoBehaviour
                 break;
             case PlayerTaskType.BuyProperty:
                 _playerInput.SetState(new BuyPropertyState());
+                break;
+            case PlayerTaskType.FlyToTile:
+                _playerInput.SetState(new FlyToTileState());
                 break;
             default:
                 break;
@@ -71,32 +80,19 @@ public class Player : MonoBehaviour
         int value = dice1Value + dice2Value;
         bool isPair = dice1Value == dice2Value;
         if (isPair) playerTasks.Push(PlayerTaskType.RollDice);
-        _playerMovement.MoveWithDice(value, _occupiedTile.TileIndex, isPair, SetNewOccuiedTile);
+        PlayerMovement.MoveWithDice(value, _occupiedTile.TileIndex, isPair, SetNewOccuiedTile);
     }
-
-    public void MoveToTile(TileBase tile)
-    {
-        _playerMovement.MoveToTile(tile);
-        SetNewOccuiedTile(tile);
-    }
-
     public void BuyProperty(int level)
     {
-        (_occupiedTile as CityTile).CreateProperty(level, _playerColor);
+        (_occupiedTile as CityTile).CreateProperty(level, PlayerColor);
         Invoke(nameof(OnEndTask), 1f);
     }
-
     public void UpgradeProperty()
     {
         (_occupiedTile as CityTile).UpgradeProperty();
         Invoke(nameof(OnEndTask), 1f);
     }
-
-    public void MoveAround()
-    {
-        _playerMovement.MoveAround(_occupiedTile.TileIndex, SetNewOccuiedTile);
-    }
-    private void SetNewOccuiedTile(TileBase tile)
+    public void SetNewOccuiedTile(TileBase tile)
     {
         CheckTileStatus(tile);
         _occupiedTile = tile;
@@ -111,7 +107,7 @@ public class Player : MonoBehaviour
                 CityTile temp = tile as CityTile;
                 if (temp.Property == null)
                     playerTasks.Push(PlayerTaskType.BuyProperty);
-                else if (temp.OwnerColor == this._playerColor)
+                else if (temp.OwnerColor == this.PlayerColor)
                     playerTasks.Push(PlayerTaskType.UpgradeProperty);
                 else
                     playerTasks.Push(PlayerTaskType.PayRent);

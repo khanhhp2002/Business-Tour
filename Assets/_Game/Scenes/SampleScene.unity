@@ -5677,8 +5677,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _occupiedTile: {fileID: 82476220}
-  _playerMovement: {fileID: 0}
-  _playerInput: {fileID: 0}
+  _playerMovement: {fileID: 1326028992}
+  _playerInput: {fileID: 1326028993}
   _playerColor: 0
 --- !u!114 &1326028992
 MonoBehaviour:
@@ -5693,6 +5693,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveDelayTime: 0.25
+  _start: {fileID: 82476220}
 --- !u!114 &1326028993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5765,7 +5766,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1326028990}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.03, y: -3.61, z: 0}
+  m_LocalPosition: {x: 0, y: -3.5, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

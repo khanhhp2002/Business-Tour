@@ -6,7 +6,6 @@ public abstract class TileBase : MonoBehaviour
     [SerializeField] private SpriteRenderer _imageSprite;
     [SerializeField] private TileType _tileType;
 
-
     public SpriteRenderer ImageSprite { get => _imageSprite; }
     public int TileIndex => _tileIndex;
     public TileType TileType { get => _tileType; }
@@ -17,6 +16,7 @@ public abstract class TileBase : MonoBehaviour
     }
     public virtual void OnMouseButtonDown()
     {
-        Debug.Log("TileBase");
+
     }
+    public bool IsTileType(TileType tileType) => this._tileType == tileType;
 }
