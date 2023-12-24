@@ -83,6 +83,7 @@ public class Launcher : PhotonSingleton<Launcher>
         _roomId.text = PhotonNetwork.CurrentRoom.Name;
         _logStatus.text = $"Joined room {_roomId.text}";
         _customRoomId = string.Empty;
+        ChatManager.Instance.JoinChatBox();
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
@@ -108,6 +109,7 @@ public class Launcher : PhotonSingleton<Launcher>
     public override void OnLeftRoom()
     {
         _logStatus.text = $"Left room.";
+        ChatManager.Instance.LeaveChatBox();
     }
 
     public void LeaveRoom()
