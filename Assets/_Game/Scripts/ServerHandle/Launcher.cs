@@ -11,6 +11,7 @@ public class Launcher : PhotonSingleton<Launcher>
     private string _customRoomId;
     private bool _isLeaveAndJoinNewRoom = false;
     public List<RoomInfo> _roomList = new List<RoomInfo>();
+    public List<Photon.Realtime.Player> _playerList = new List<Photon.Realtime.Player>();
     // Start is called before the first frame update
     void Start()
     {
@@ -127,11 +128,33 @@ public class Launcher : PhotonSingleton<Launcher>
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
-        Debug.Log($"Room list updated. Total rooms: {roomList.Count}");
+        _roomList.Clear();
         _roomList = roomList;
-        foreach (var room in roomList)
+    }
+
+    public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
+    {
+        _playerList.Add(newPlayer);
+    }
+
+    public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
+    {
+        _playerList.Remove(otherPlayer);
+    }
+
+    public override void OnMasterClientSwitched(Photon.Realtime.Player newMasterClient)
+    {
+        Debug.Log($"Master client switched to {newMasterClient.NickName}");
+    }
+
+    public void KickPlayer(string playerNickName)
+    {
+        foreach (var player in PhotonNetwork.PlayerList)
         {
-            Debug.Log($"Room: {room.Name}");
+            if (player.NickName == playerNickName)
+            {
+                PhotonNetwork.CloseConnection(player);
+            }
         }
     }
 }
