@@ -3,20 +3,23 @@ using Photon.Pun;
 using TMPro;
 using Photon.Realtime;
 using System.Collections.Generic;
+using System;
+using UnityEngine.UI;
 public class Launcher : PhotonSingleton<Launcher>
 {
     [SerializeField] private TMP_Text _logStatus;
     [SerializeField] private TMP_Text _roomId;
     [SerializeField] private TMP_InputField _roomIdInput;
+    [SerializeField] private Button _createRoomButton;
     private string _customRoomId;
-    private bool _isLeaveAndJoinNewRoom = false;
-    public List<RoomInfo> _roomList = new List<RoomInfo>();
     public List<Photon.Realtime.Player> _playerList = new List<Photon.Realtime.Player>();
+    public Action OnLeaveAndJoinNewRoom;
     // Start is called before the first frame update
     void Start()
     {
         _logStatus.text = "Attempting to connect to server...";
         PhotonNetwork.ConnectUsingSettings();
+        _createRoomButton.onClick.AddListener(CreateRoom);
     }
 
     public override void OnConnectedToMaster()
@@ -28,15 +31,6 @@ public class Launcher : PhotonSingleton<Launcher>
     public override void OnJoinedLobby()
     {
         _logStatus.text = "Joined lobby.";
-        if (_isLeaveAndJoinNewRoom)
-        {
-            _isLeaveAndJoinNewRoom = false;
-            PhotonNetwork.JoinRoom(_customRoomId);
-        }
-        else
-        {
-            CreateRoom();
-        }
     }
 
     public void CreateRoom()
@@ -46,6 +40,7 @@ public class Launcher : PhotonSingleton<Launcher>
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.MaxPlayers = 4;
         PhotonNetwork.CreateRoom(roomID, roomOptions);
+        _createRoomButton.enabled = false;
     }
 
     public void ChangeRoomVisibleStatus(bool visible)
@@ -66,10 +61,15 @@ public class Launcher : PhotonSingleton<Launcher>
             return;
         }
         _customRoomId = _roomIdInput.text;
-        if (FindRoomById(_roomIdInput.text))
+        if (RoomManager.Instance.IsRoomExist(_customRoomId))
         {
             _logStatus.text = $"Attempting to join room {_roomIdInput.text}...";
-            _isLeaveAndJoinNewRoom = true;
+            OnLeaveAndJoinNewRoom = null;
+            OnLeaveAndJoinNewRoom += () =>
+            {
+                PhotonNetwork.JoinRoom(_customRoomId);
+                RoomManager.Instance.ClearList();
+            };
             LeaveRoom();
         }
         else
@@ -78,21 +78,10 @@ public class Launcher : PhotonSingleton<Launcher>
         }
     }
 
-    private bool FindRoomById(string id)
-    {
-        foreach (var room in _roomList)
-        {
-            if (room.Name == id)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public override void OnJoinedRoom()
     {
-        _logStatus.text = $"Joined room {(!string.IsNullOrEmpty(_customRoomId) ? _customRoomId : _roomId.text)}";
+        _roomId.text = PhotonNetwork.CurrentRoom.Name;
+        _logStatus.text = $"Joined room {_roomId.text}";
         _customRoomId = string.Empty;
     }
 
@@ -123,13 +112,13 @@ public class Launcher : PhotonSingleton<Launcher>
 
     public void LeaveRoom()
     {
-        PhotonNetwork.LeaveRoom();
-    }
-
-    public override void OnRoomListUpdate(List<RoomInfo> roomList)
-    {
-        _roomList.Clear();
-        _roomList = roomList;
+        if (PhotonNetwork.InRoom)
+            PhotonNetwork.LeaveRoom();
+        if (OnLeaveAndJoinNewRoom != null)
+        {
+            OnLeaveAndJoinNewRoom.Invoke();
+            OnLeaveAndJoinNewRoom = null;
+        }
     }
 
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)

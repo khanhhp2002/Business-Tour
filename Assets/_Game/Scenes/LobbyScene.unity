@@ -699,6 +699,7 @@ MonoBehaviour:
   _logStatus: {fileID: 1673986667}
   _roomId: {fileID: 1410467285}
   _roomIdInput: {fileID: 321315037}
+  _createRoomButton: {fileID: 1125731562}
 --- !u!4 &442423542
 Transform:
   m_ObjectHideFlags: 0
@@ -785,10 +786,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -826,6 +827,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 804214511}
+  - component: {fileID: 804214512}
   m_Layer: 5
   m_Name: Available_Room
   m_TagString: Untagged
@@ -855,6 +857,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -100}
   m_SizeDelta: {x: 0, y: -200}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &804214512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 804214510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 918191357c19b1c47914ec9735b56dc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _roomPrefab: {fileID: 4251982963280141548, guid: d034aa07cce8f2e499752bd3bd1f4d75, type: 3}
+  _roomContainer: {fileID: 841193161}
+  _availableRoomList: []
 --- !u!1 &841193160
 GameObject:
   m_ObjectHideFlags: 0
@@ -867,7 +884,7 @@ GameObject:
   - component: {fileID: 841193163}
   - component: {fileID: 841193162}
   m_Layer: 5
-  m_Name: Room_Content
+  m_Name: ROOM_CONTAINER
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1148,7 +1165,7 @@ GameObject:
   - component: {fileID: 1125731563}
   - component: {fileID: 1125731562}
   m_Layer: 5
-  m_Name: UI_FIND_MATCH_BUTTON
+  m_Name: UI_CREATE_ROOM_BUTTON
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1439,8 +1456,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1463,7 +1480,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 32
+  m_fontStyle: 33
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
