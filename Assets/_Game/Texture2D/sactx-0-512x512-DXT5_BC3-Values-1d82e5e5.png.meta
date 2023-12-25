@@ -42,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -115,7 +115,133 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: sactx-0-512x512-DXT5_BC3-Values-1d82e5e5_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e99c5cfcb610ebb48a8824c6edb7d29e
+      internalID: 331772531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-0-512x512-DXT5_BC3-Values-1d82e5e5_1
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 192
+        width: 164
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd2b4d252d93cc14ebae28c257cc989e
+      internalID: -2045571827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-0-512x512-DXT5_BC3-Values-1d82e5e5_2
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 5
+        width: 162
+        height: 175
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab9b580ab58563b449b9ae2a5d61ea8e
+      internalID: 1871912536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-0-512x512-DXT5_BC3-Values-1d82e5e5_3
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 5
+        width: 161
+        height: 175
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd620d2012df71243a1e663c3ce637ea
+      internalID: 1814535105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-0-512x512-DXT5_BC3-Values-1d82e5e5_4
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 5
+        width: 161
+        height: 175
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69cda4be87b4b2e4eae1e47479ef3e2f
+      internalID: -976950377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-0-512x512-DXT5_BC3-Values-1d82e5e5_5
+      rect:
+        serializedVersion: 2
+        x: 335
+        y: 192
+        width: 160
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc715667e4c6e864caefbcd84f5c7804
+      internalID: -916657377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -126,7 +252,13 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      sactx-0-512x512-DXT5_BC3-Values-1d82e5e5_0: 331772531
+      sactx-0-512x512-DXT5_BC3-Values-1d82e5e5_1: -2045571827
+      sactx-0-512x512-DXT5_BC3-Values-1d82e5e5_2: 1871912536
+      sactx-0-512x512-DXT5_BC3-Values-1d82e5e5_3: 1814535105
+      sactx-0-512x512-DXT5_BC3-Values-1d82e5e5_4: -976950377
+      sactx-0-512x512-DXT5_BC3-Values-1d82e5e5_5: -916657377
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
