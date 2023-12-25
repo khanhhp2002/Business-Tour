@@ -17,8 +17,7 @@ public class RollDiceState : IPlayerInputState
         }
         else if (Input.GetKeyDown(KeyCode.A))
         {
-            player.PlayerMovement.MoveToTile(TileManager.Instance.Airport);
-            player.SetNewOccuiedTile(TileManager.Instance.Airport);
+            player.PlayerMovement.MoveToTile(TileManager.Instance.Airport, player);
 
         }
         _timer -= Time.deltaTime;

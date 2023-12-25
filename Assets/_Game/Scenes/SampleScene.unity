@@ -2420,6 +2420,11 @@ MonoBehaviour:
   - {fileID: 4712142194786903441, guid: 302eb8260b3970843af1f541ec397dfa, type: 3}
   - {fileID: 1730012783859173206, guid: 45c79073dcb505648aa643cc25b4698e, type: 3}
   - {fileID: 950604729591075797, guid: b5ba9b9933c1d6b4d9272693f958b089, type: 3}
+  _airport: {fileID: 810362044}
+  _start: {fileID: 82476220}
+  _worldCup: {fileID: 1326924213}
+  _island: {fileID: 2140570066}
+  _tax: {fileID: 534351099}
 --- !u!1 &495121917
 GameObject:
   m_ObjectHideFlags: 0
@@ -5693,7 +5698,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveDelayTime: 0.25
-  _start: {fileID: 82476220}
 --- !u!114 &1326028993
 MonoBehaviour:
   m_ObjectHideFlags: 0

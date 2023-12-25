@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Photon.Realtime;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -37,9 +38,10 @@ public class PlayerMovement : MonoBehaviour
         transform.transform.DOJump(newPosition, 1f, 1, _moveDelayTime / 2f)
             .OnComplete(() => temp.DOMoveY(temp.position.y - _yOffset, _moveDelayTime / 2f).SetLoops(2, LoopType.Yoyo));
     }
-    public void MoveToTile(TileBase tile)
+    public void MoveToTile(TileBase tile, Player player)
     {
         transform.position = tile.transform.position;
+        player.SetNewOccuiedTile(tile);
     }
     public void MoveAround(int originTileIndex, Action<TileBase> onEndMoving)
     {
