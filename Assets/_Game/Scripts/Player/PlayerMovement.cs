@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Photon.Realtime;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -33,13 +34,13 @@ public class PlayerMovement : MonoBehaviour
         if (tileIndex == TileManager.Instance.TilesCount) tileIndex = 0;
         Transform temp = TileManager.Instance.GetTile(tileIndex).transform;
         Vector3 newPosition = temp.position;
-        newPosition.y += 0.5f;
         transform.transform.DOJump(newPosition, 1f, 1, _moveDelayTime / 2f)
             .OnComplete(() => temp.DOMoveY(temp.position.y - _yOffset, _moveDelayTime / 2f).SetLoops(2, LoopType.Yoyo));
     }
-    public void MoveToTile(TileBase tile)
+    public void MoveToTile(TileBase tile, Player player)
     {
         transform.position = tile.transform.position;
+        player.SetNewOccuiedTile(tile);
     }
     public void MoveAround(int originTileIndex, Action<TileBase> onEndMoving)
     {
@@ -66,7 +67,6 @@ public class PlayerMovement : MonoBehaviour
         onEndMoving.Invoke(destinationTile);
         TileManager.Instance.BlinkImage(destinationTile, false);
         _isMoving = false;
-
     }
     private TileBase FindDestination(int originTileIndex, int value = 0)
     {

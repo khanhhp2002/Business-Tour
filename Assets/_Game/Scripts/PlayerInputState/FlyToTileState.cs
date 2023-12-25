@@ -16,7 +16,7 @@ public class FlyToTileState : IPlayerInputState
     {
         if (_timer <= 0)
         {
-            _thisPlayer.PlayerMovement.MoveToTile(TileManager.Instance.Start);
+            _thisPlayer.PlayerMovement.MoveToTile(TileManager.Instance.Start, _thisPlayer);
         }
         _timer -= Time.deltaTime;
     }
@@ -29,8 +29,7 @@ public class FlyToTileState : IPlayerInputState
         CityTile temp = tile as CityTile;
         if (temp != null)
         {
-            _thisPlayer.PlayerMovement.MoveToTile(temp);
-            _thisPlayer.SetNewOccuiedTile(temp);
+            _thisPlayer.PlayerMovement.MoveToTile(temp, _thisPlayer);
         }
     }
 }
