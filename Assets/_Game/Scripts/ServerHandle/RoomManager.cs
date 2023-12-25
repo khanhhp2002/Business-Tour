@@ -24,6 +24,7 @@ public class RoomManager : PhotonSingleton<RoomManager>
 
         foreach (var roomInfo in roomList)
         {
+            if (roomInfo.PlayerCount == 0 || !roomInfo.IsOpen || !roomInfo.IsVisible || roomInfo.RemovedFromList) continue;
             Room temp = _roomPool.Pull(_roomContainer);
             temp.SetRoomData(roomInfo);
             _availableRoomList.Add(temp);
@@ -55,6 +56,7 @@ public class RoomManager : PhotonSingleton<RoomManager>
     }
     public void ClearList()
     {
+        if (_availableRoomList.Count == 0) return;
         foreach (var room in _availableRoomList)
         {
             room.ReturnToPool();

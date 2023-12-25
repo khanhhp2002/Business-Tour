@@ -38,12 +38,7 @@ public class Room : MonoBehaviour, IPoolable<Room>
 
     public void JoinRoom()
     {
-        Launcher.Instance.OnLeaveAndJoinNewRoom = null;
-        Launcher.Instance.OnLeaveAndJoinNewRoom += () =>
-        {
-            PhotonNetwork.JoinRoom(_roomInfo.Name);
-            RoomManager.Instance.ClearList();
-        };
-        Launcher.Instance.LeaveRoom();
+        Launcher.Instance.JoinRoomById(_roomInfo.Name);
+        RoomManager.Instance.ClearList();
     }
 }
