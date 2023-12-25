@@ -42,7 +42,6 @@ public class Player : MonoBehaviour
             playerTasks.Push(PlayerTaskType.FlyToTile); //ToDo: need to change into FlyToTile in future
         Invoke(nameof(OnGetTask), 1f);
     }
-
     public void OnGetTask()
     {
         Debug.Log("OnGetTask");
@@ -75,13 +74,11 @@ public class Player : MonoBehaviour
             Invoke(nameof(OnGetTask), 1f);
         }
     }
-
     public void OnEndTurn()
     {
         Debug.Log("OnEndTurn");
         GameplayManager.Instance.ChangePlayer();
     }
-
     public void MoveWithDice()
     {
         int dice1Value = Random.Range(1, 7);
