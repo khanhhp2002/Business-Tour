@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
@@ -26,6 +27,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         OnInit();
+
     }
     private void OnInit()
     {
@@ -125,12 +127,12 @@ public class Player : MonoBehaviour
                 return;
         }
     }
-    public void SetDiceImage(int value1, int value2)
+    private void SetDiceImage(int value1, int value2)
     {
         _dice1Sprite.sprite = _currentDice.GetDiceImageByValue(value1);
         _dice2Sprite.sprite = _currentDice.GetDiceImageByValue(value2);
     }
-    public void Rolling()
+    public void RollAndMove()
     {
         _rollTimer = 3f;
         StartCoroutine(nameof(SpineDice));
@@ -139,6 +141,8 @@ public class Player : MonoBehaviour
     {
         int value1;
         int value2;
+        _dice1Sprite.gameObject.transform.DOShakeRotation(_rollTimer, 100, 50);
+        _dice2Sprite.gameObject.transform.DOShakeRotation(_rollTimer, 100, 50);
         while (_rollTimer >= 0)
         {
             value1 = Random.Range(1, 7);
