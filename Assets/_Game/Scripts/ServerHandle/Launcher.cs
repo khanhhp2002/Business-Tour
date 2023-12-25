@@ -10,9 +10,9 @@ public class Launcher : PhotonSingleton<Launcher>
     [SerializeField] private TMP_Text _logStatus;
     [SerializeField] private Button _leaveRoomButton;
     public List<Photon.Realtime.Player> _playerList = new List<Photon.Realtime.Player>();
-    //public Action OnLeaveAndJoinNewRoom;
     public Action<string> OnJoinRoom;
     public Action OnLeaveRoom;
+    public Action<int> OnPlayerCountChanged;
     // Start is called before the first frame update
     void Start()
     {
@@ -71,6 +71,8 @@ public class Launcher : PhotonSingleton<Launcher>
     public override void OnJoinedRoom()
     {
         OnJoinRoom?.Invoke(PhotonNetwork.CurrentRoom.Name);
+        _playerList.AddRange(PhotonNetwork.PlayerList);
+        OnPlayerCountChanged?.Invoke(_playerList.Count);
         RoomManager.Instance.ClearList();
     }
 
@@ -102,18 +104,24 @@ public class Launcher : PhotonSingleton<Launcher>
 
     public void LeaveRoom()
     {
+        Debug.Log("Leave room");
         if (PhotonNetwork.InRoom)
+        {
             PhotonNetwork.LeaveRoom();
+            _playerList.Clear();
+        }
     }
 
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
     {
         _playerList.Add(newPlayer);
+        OnPlayerCountChanged?.Invoke(_playerList.Count);
     }
 
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
     {
         _playerList.Remove(otherPlayer);
+        OnPlayerCountChanged?.Invoke(_playerList.Count);
     }
 
     public override void OnMasterClientSwitched(Photon.Realtime.Player newMasterClient)
