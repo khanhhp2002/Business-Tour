@@ -4,7 +4,7 @@ public static class RandomString
 {
     public static string Generate(int length)
     {
-        const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         var random = new System.Random();
         return new string(Enumerable.Repeat(chars, length)
                        .Select(s => s[random.Next(s.Length)]).ToArray());

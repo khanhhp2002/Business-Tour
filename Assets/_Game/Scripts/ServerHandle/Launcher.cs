@@ -9,10 +9,13 @@ public class Launcher : PhotonSingleton<Launcher>
 {
     [SerializeField] private TMP_Text _logStatus;
     [SerializeField] private Button _leaveRoomButton;
+    [SerializeField] private NamePanel _namePanel;
     public List<Photon.Realtime.Player> _playerList = new List<Photon.Realtime.Player>();
     public Action<string> OnJoinRoom;
     public Action OnLeaveRoom;
     public Action<int> OnPlayerCountChanged;
+    public Action<Photon.Realtime.Player> OnPlayerJoined;
+    public Action<Photon.Realtime.Player> OnPlayerLeft;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +33,10 @@ public class Launcher : PhotonSingleton<Launcher>
     public override void OnJoinedLobby()
     {
         _logStatus.text = "Joined lobby.";
+        if (!PlayerPrefs.HasKey("PlayerName"))
+        {
+            _namePanel.gameObject.SetActive(true);
+        }
     }
 
     public void CreateRoom()
@@ -71,8 +78,10 @@ public class Launcher : PhotonSingleton<Launcher>
     public override void OnJoinedRoom()
     {
         OnJoinRoom?.Invoke(PhotonNetwork.CurrentRoom.Name);
-        _playerList.AddRange(PhotonNetwork.PlayerList);
-        OnPlayerCountChanged?.Invoke(_playerList.Count);
+        Photon.Realtime.Player[] players = PhotonNetwork.PlayerList;
+        FlagManager.Instance.AddAllPlayer(players);
+        _playerList.AddRange(players);
+        OnPlayerCountChanged?.Invoke(players.Length);
         RoomManager.Instance.ClearList();
     }
 
@@ -114,19 +123,23 @@ public class Launcher : PhotonSingleton<Launcher>
 
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
     {
+        ChatManager.Instance.SentMessage($"Player {newPlayer.NickName} joined client.");
+        OnPlayerJoined?.Invoke(newPlayer);
         _playerList.Add(newPlayer);
         OnPlayerCountChanged?.Invoke(_playerList.Count);
     }
 
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
     {
+        ChatManager.Instance.SentMessage($"Player {otherPlayer.NickName} left client.");
+        OnPlayerLeft?.Invoke(otherPlayer);
         _playerList.Remove(otherPlayer);
         OnPlayerCountChanged?.Invoke(_playerList.Count);
     }
 
     public override void OnMasterClientSwitched(Photon.Realtime.Player newMasterClient)
     {
-        Debug.Log($"Master client switched to {newMasterClient.NickName}");
+        ChatManager.Instance.SentMessage($"Player {newMasterClient.NickName} is now the master client.");
     }
 
     public void KickPlayer(string playerNickName)
