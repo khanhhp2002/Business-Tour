@@ -9,15 +9,20 @@ public class ChatManager : Singleton<ChatManager>
 
     private void Start()
     {
+        _inputChat.interactable = false;
         _inputChat.onSubmit.AddListener(SentMessage);
+        Launcher.Instance.OnLeaveRoom += LeaveChatBox;
+        Launcher.Instance.OnJoinRoom += JoinChatBox;
     }
-    public void JoinChatBox()
+    public void JoinChatBox(string roomId)
     {
-        _chatContent.text += "<color=yellow>You are connected to this client.</color>\n";
+        _inputChat.interactable = true;
+        _chatContent.text += "<color=yellow>You are connected to room: " + roomId + "</color>\n";
     }
 
     public void LeaveChatBox()
     {
+        _inputChat.interactable = false;
         _chatContent.text = string.Empty;
     }
 
