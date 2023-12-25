@@ -37,6 +37,10 @@ public class Launcher : PhotonSingleton<Launcher>
         {
             _namePanel.gameObject.SetActive(true);
         }
+        else
+        {
+            PhotonNetwork.NickName = PlayerPrefs.GetString("PlayerName");
+        }
     }
 
     public void CreateRoom()
