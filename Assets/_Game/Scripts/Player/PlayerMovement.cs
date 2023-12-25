@@ -68,7 +68,6 @@ public class PlayerMovement : MonoBehaviour
         onEndMoving.Invoke(destinationTile);
         TileManager.Instance.BlinkImage(destinationTile, false);
         _isMoving = false;
-
     }
     private TileBase FindDestination(int originTileIndex, int value = 0)
     {
