@@ -1,18 +1,21 @@
+using System.Collections;
 using UnityEngine;
 
 public class RollDiceState : IPlayerInputState
 {
-    private float _timer = 0f;
+    private float _waitTimer = 0f;
+    private Player _thisPlayer;
     public void OnEnter(Player player)
     {
-        _timer = 10f;
+        _waitTimer = 10f;
+        _thisPlayer = player;
     }
 
     public void OnExecute(Player player)
     {
-        if (Input.GetKeyDown(KeyCode.Space) || _timer <= 0)
+        if (Input.GetKeyDown(KeyCode.Space) || _waitTimer <= 0)
         {
-            player.MoveWithDice();
+            player.Rolling();
             player.PlayerInput.SetState(new EmptyState());
         }
         else if (Input.GetKeyDown(KeyCode.A))
@@ -20,7 +23,7 @@ public class RollDiceState : IPlayerInputState
             player.PlayerMovement.MoveToTile(TileManager.Instance.Airport, player);
 
         }
-        _timer -= Time.deltaTime;
+        _waitTimer -= Time.deltaTime;
     }
 
     public void OnExit(Player player)

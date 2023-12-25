@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faf0daedbadcc3b4a8ce752f177930ac, type: 3}
+  m_Name: DiceSO
+  m_EditorClassIdentifier: 
+  _diceList:
+  - _diceImageArray:
+    - {fileID: 331772531, guid: 8fc4aa76bca30044396ce56b8d3c73a9, type: 3}
+    - {fileID: 1871912536, guid: 8fc4aa76bca30044396ce56b8d3c73a9, type: 3}
+    - {fileID: -976950377, guid: 8fc4aa76bca30044396ce56b8d3c73a9, type: 3}
+    - {fileID: -916657377, guid: 8fc4aa76bca30044396ce56b8d3c73a9, type: 3}
+    - {fileID: 1814535105, guid: 8fc4aa76bca30044396ce56b8d3c73a9, type: 3}
+    - {fileID: -2045571827, guid: 8fc4aa76bca30044396ce56b8d3c73a9, type: 3}
