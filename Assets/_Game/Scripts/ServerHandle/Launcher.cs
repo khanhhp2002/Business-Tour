@@ -17,6 +17,7 @@ public class Launcher : PhotonSingleton<Launcher>
     // Start is called before the first frame update
     void Start()
     {
+        //Using the setting of PUN(Photon Unity Network) if success return OnConnectedToMaster
         PhotonNetwork.ConnectUsingSettings();
         _leaveRoomButton.onClick.AddListener(() =>
         {
@@ -27,7 +28,9 @@ public class Launcher : PhotonSingleton<Launcher>
 
     public override void OnConnectedToMaster()
     {
+        //Join a lobby of server if success return OnJoinedLobby
         PhotonNetwork.JoinLobby();
+        //Sync scene following the host
         PhotonNetwork.AutomaticallySyncScene = true;
     }
 
@@ -49,6 +52,7 @@ public class Launcher : PhotonSingleton<Launcher>
         string roomID = RandomString.Generate(6);
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.MaxPlayers = 4;
+        //Create a room in lobby if success return OnJoinedRoom
         PhotonNetwork.CreateRoom(roomID, roomOptions);
     }
 
@@ -60,6 +64,7 @@ public class Launcher : PhotonSingleton<Launcher>
         }
         if (RoomManager.Instance.IsRoomExist(id))
         {
+            //Join a room by id if success return OnJoinedRoom
             PhotonNetwork.JoinRoom(id);
         }
         else
@@ -78,12 +83,6 @@ public class Launcher : PhotonSingleton<Launcher>
         RoomManager.Instance.ClearList();
     }
 
-    public override void OnLeftRoom()
-    {
-        SoundManager.Instance.PlaySound((int)SFXType.LeaveRoom);
-        OnLeaveRoom?.Invoke();
-    }
-
     public void LeaveRoom()
     {
         if (PhotonNetwork.InRoom)
@@ -91,6 +90,12 @@ public class Launcher : PhotonSingleton<Launcher>
             PhotonNetwork.LeaveRoom();
             _playerList.Clear();
         }
+    }
+
+    public override void OnLeftRoom()
+    {
+        SoundManager.Instance.PlaySound((int)SFXType.LeaveRoom);
+        OnLeaveRoom?.Invoke();
     }
 
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)

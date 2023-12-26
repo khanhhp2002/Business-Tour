@@ -138,8 +138,8 @@ public class Player : MonoBehaviour
     {
         int value1;
         int value2;
-        _dice1Sprite.gameObject.transform.DOShakeRotation(_rollTimer, 100, 50);
-        _dice2Sprite.gameObject.transform.DOShakeRotation(_rollTimer, 100, 50);
+        _dice1Sprite.gameObject.transform.DOShakeRotation(_rollTimer, 100, 50, 90, true, ShakeRandomnessMode.Harmonic);
+        _dice2Sprite.gameObject.transform.DOShakeRotation(_rollTimer, 100, 50, 90, true, ShakeRandomnessMode.Harmonic);
         while (_rollTimer >= 0)
         {
             value1 = Random.Range(1, 7);
