@@ -37,7 +37,7 @@ public class EventHandle : PhotonSingleton<EventHandle>, IOnEventCallback
 
     public void ChatMessageSend(string message)
     {
-        object[] data = new object[] { PhotonNetwork.LocalPlayer.ActorNumber, message };
+        object[] data = new object[] { PhotonNetwork.LocalPlayer.NickName, message };
         PhotonNetwork.RaiseEvent(
             (byte)EventCodes.ChatMessage,
             data,
