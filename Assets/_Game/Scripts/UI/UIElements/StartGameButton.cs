@@ -10,7 +10,6 @@ public class StartGameButton : MonoBehaviour
     [SerializeField] private Sprite _guestView;
     [SerializeField] private Image _background;
     [SerializeField] private TMP_Text _text;
-
     private void Start()
     {
         _startGameButton.onClick.AddListener(() =>
