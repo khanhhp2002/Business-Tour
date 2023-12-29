@@ -1,13 +1,11 @@
 using UnityEngine;
 using Photon.Pun;
-using TMPro;
 using Photon.Realtime;
 using System.Collections.Generic;
 using System;
 using UnityEngine.UI;
 public class Launcher : PhotonSingleton<Launcher>
 {
-    [SerializeField] private TMP_Text _logStatus;
     [SerializeField] private Button _leaveRoomButton;
     [SerializeField] private NamePanel _namePanel;
     public List<Photon.Realtime.Player> _playerList = new List<Photon.Realtime.Player>();
@@ -19,20 +17,25 @@ public class Launcher : PhotonSingleton<Launcher>
     // Start is called before the first frame update
     void Start()
     {
-        _logStatus.text = "Attempting to connect to server...";
+        //Using the setting of PUN(Photon Unity Network) if success return OnConnectedToMaster
         PhotonNetwork.ConnectUsingSettings();
-        _leaveRoomButton.onClick.AddListener(LeaveRoom);
+        _leaveRoomButton.onClick.AddListener(() =>
+        {
+            SoundManager.Instance.PlaySound((int)SFXType.ButtonClick);
+            LeaveRoom();
+        });
     }
 
     public override void OnConnectedToMaster()
     {
-        _logStatus.text = "Attempting to join lobby...";
+        //Join a lobby of server if success return OnJoinedLobby
         PhotonNetwork.JoinLobby();
+        //Sync scene following the host
+        PhotonNetwork.AutomaticallySyncScene = true;
     }
 
     public override void OnJoinedLobby()
     {
-        _logStatus.text = "Joined lobby.";
         if (!PlayerPrefs.HasKey("PlayerName"))
         {
             _namePanel.gameObject.SetActive(true);
@@ -45,42 +48,33 @@ public class Launcher : PhotonSingleton<Launcher>
 
     public void CreateRoom()
     {
+        if (!PhotonNetwork.InLobby) return;
         string roomID = RandomString.Generate(6);
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.MaxPlayers = 4;
+        //Create a room in lobby if success return OnJoinedRoom
         PhotonNetwork.CreateRoom(roomID, roomOptions);
-    }
-
-    public void ChangeRoomVisibleStatus(bool visible)
-    {
-        PhotonNetwork.CurrentRoom.IsVisible = visible;
-    }
-
-    public void ChangeRoomOpenStatus(bool isOpen)
-    {
-        PhotonNetwork.CurrentRoom.IsOpen = isOpen;
     }
 
     public void JoinRoomById(string id)
     {
         if (string.IsNullOrEmpty(id))
         {
-            _logStatus.text = "Room ID is empty.";
             return;
         }
         if (RoomManager.Instance.IsRoomExist(id))
         {
-            _logStatus.text = $"Attempting to join room {id}...";
+            //Join a room by id if success return OnJoinedRoom
             PhotonNetwork.JoinRoom(id);
         }
         else
         {
-            _logStatus.text = $"Room {id} not found.";
         }
     }
 
     public override void OnJoinedRoom()
     {
+        SoundManager.Instance.PlaySound((int)SFXType.JoinRoom);
         OnJoinRoom?.Invoke(PhotonNetwork.CurrentRoom.Name);
         Photon.Realtime.Player[] players = PhotonNetwork.PlayerList;
         FlagManager.Instance.AddAllPlayer(players);
@@ -89,35 +83,8 @@ public class Launcher : PhotonSingleton<Launcher>
         RoomManager.Instance.ClearList();
     }
 
-    public override void OnCreateRoomFailed(short returnCode, string message)
-    {
-        _logStatus.text = $"Failed to create room: {message}";
-    }
-
-    public override void OnJoinRoomFailed(short returnCode, string message)
-    {
-        _logStatus.text = $"Failed to join room: {message}";
-    }
-
-    public override void OnJoinRandomFailed(short returnCode, string message)
-    {
-        _logStatus.text = $"Failed to join random room: {message}";
-    }
-
-    public override void OnDisconnected(DisconnectCause cause)
-    {
-        _logStatus.text = $"Disconnected: {cause}";
-    }
-
-    public override void OnLeftRoom()
-    {
-        _logStatus.text = $"Left room.";
-        OnLeaveRoom?.Invoke();
-    }
-
     public void LeaveRoom()
     {
-        Debug.Log("Leave room");
         if (PhotonNetwork.InRoom)
         {
             PhotonNetwork.LeaveRoom();
@@ -125,8 +92,15 @@ public class Launcher : PhotonSingleton<Launcher>
         }
     }
 
+    public override void OnLeftRoom()
+    {
+        SoundManager.Instance.PlaySound((int)SFXType.LeaveRoom);
+        OnLeaveRoom?.Invoke();
+    }
+
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
     {
+        SoundManager.Instance.PlaySound((int)SFXType.JoinRoom);
         ChatManager.Instance.SentMessage($"Player {newPlayer.NickName} joined client.");
         OnPlayerJoined?.Invoke(newPlayer);
         _playerList.Add(newPlayer);
@@ -141,11 +115,6 @@ public class Launcher : PhotonSingleton<Launcher>
         OnPlayerCountChanged?.Invoke(_playerList.Count);
     }
 
-    public override void OnMasterClientSwitched(Photon.Realtime.Player newMasterClient)
-    {
-        ChatManager.Instance.SentMessage($"Player {newMasterClient.NickName} is now the master client.");
-    }
-
     public void KickPlayer(string playerNickName)
     {
         foreach (var player in PhotonNetwork.PlayerList)
@@ -155,5 +124,46 @@ public class Launcher : PhotonSingleton<Launcher>
                 PhotonNetwork.CloseConnection(player);
             }
         }
+    }
+
+    public void StartGame()
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.CurrentRoom.IsOpen = false;
+            PhotonNetwork.CurrentRoom.IsVisible = false;
+            PhotonNetwork.LoadLevel(1);
+        }
+    }
+
+    public override void OnMasterClientSwitched(Photon.Realtime.Player newMasterClient)
+    {
+        ChatManager.Instance.SentMessage($"Player {newMasterClient.NickName} is now the master client.");
+    }
+
+    public void ChangeRoomVisibleStatus(bool visible)
+    {
+        PhotonNetwork.CurrentRoom.IsVisible = visible;
+    }
+
+    public void ChangeRoomOpenStatus(bool isOpen)
+    {
+        PhotonNetwork.CurrentRoom.IsOpen = isOpen;
+    }
+
+    public override void OnCreateRoomFailed(short returnCode, string message)
+    {
+    }
+
+    public override void OnJoinRoomFailed(short returnCode, string message)
+    {
+    }
+
+    public override void OnJoinRandomFailed(short returnCode, string message)
+    {
+    }
+
+    public override void OnDisconnected(DisconnectCause cause)
+    {
     }
 }

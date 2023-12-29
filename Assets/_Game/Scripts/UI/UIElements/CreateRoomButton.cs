@@ -15,15 +15,13 @@ public class CreateRoomButton : MonoBehaviour
 
     private void Start()
     {
-        _createRoomButton.onClick.AddListener(OnButtonClick);
+        _createRoomButton.onClick.AddListener(() =>
+        {
+            SoundManager.Instance.PlaySound((int)SFXType.ButtonClick);
+            Launcher.Instance.CreateRoom();
+        });
         Launcher.Instance.OnJoinRoom += OnJoinRoom;
-        Launcher.Instance.OnLeaveRoom += onLeaveRoom;
-    }
-
-    private void OnButtonClick()
-    {
-        _background.sprite = _grayBG;
-        Launcher.Instance.CreateRoom();
+        Launcher.Instance.OnLeaveRoom += OnLeaveRoom;
     }
 
     private void OnLeavePage()
@@ -43,7 +41,7 @@ public class CreateRoomButton : MonoBehaviour
         _text.text = $"Room: {roomID}";
     }
 
-    private void onLeaveRoom()
+    private void OnLeaveRoom()
     {
         _createRoomButton.enabled = true;
         _background.sprite = _blueBG;

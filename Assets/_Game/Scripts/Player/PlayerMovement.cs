@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
         }
         onEndMoving?.Invoke(destinationTile);
         TileManager.Instance.BlinkImage(destinationTile, false);
+        DiceManager.Instance.OnOffDice(false);
         _isMoving = false;
     }
     public void MoveToTile(ref int tileIndex)

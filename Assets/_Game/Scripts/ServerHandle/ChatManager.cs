@@ -28,7 +28,7 @@ public class ChatManager : Singleton<ChatManager>
 
     public void ReceiveMessage(object[] data)
     {
-        _chatContent.text += $"<color=yellow>Player #{(int)data[0]}:</color> {(string)data[1]}\n";
+        _chatContent.text += $"<color=yellow>Player {(string)data[0]}:</color> {(string)data[1]}\n";
     }
 
     public void SentMessage(string message)
