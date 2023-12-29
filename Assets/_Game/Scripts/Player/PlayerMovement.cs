@@ -10,13 +10,13 @@ public class PlayerMovement : MonoBehaviour
 
     private bool _isMoving = false;
     private float _yOffset = 0.075f;
-    public void MoveWithDice(int value, int currentTileIndex, bool isPair, Action<TileBase> onEndMoving)
+    public void MoveWithDice(int value, int currentTileIndex, Action<TileBase> onEndMoving)
     {
         if (_isMoving) return;
         _isMoving = true;
-        StartCoroutine(MoveWithDice(value, currentTileIndex, onEndMoving));
+        StartCoroutine(MoveWithDiceCO(value, currentTileIndex, onEndMoving));
     }
-    IEnumerator MoveWithDice(int value, int currentTileIndex, Action<TileBase> onEndMoving)
+    IEnumerator MoveWithDiceCO(int value, int currentTileIndex, Action<TileBase> onEndMoving)
     {
         TileBase destinationTile = FindDestination(currentTileIndex, value);
         while (0 < value--)
@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
         }
         onEndMoving?.Invoke(destinationTile);
         TileManager.Instance.BlinkImage(destinationTile, false);
+        DiceManager.Instance.OnOffDice(false);
         _isMoving = false;
     }
     public void MoveToTile(ref int tileIndex)

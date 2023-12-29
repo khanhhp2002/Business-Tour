@@ -15,7 +15,7 @@ public class RollDiceState : IPlayerInputState
     {
         if (Input.GetKeyDown(KeyCode.Space) || _waitTimer <= 0)
         {
-            player.RollAndMove();
+            DiceManager.Instance.RollAndMove(player, player.MoveMore);
             player.PlayerInput.SetState(new EmptyState());
         }
         else if (Input.GetKeyDown(KeyCode.A))
