@@ -22,7 +22,6 @@ public class Player : MonoBehaviour
     private void Start()
     {
         OnInit();
-
     }
     private void OnInit()
     {
@@ -74,16 +73,10 @@ public class Player : MonoBehaviour
         Debug.Log("OnEndTurn");
         GameplayManager.Instance.ChangePlayer();
     }
-    public void MoveWithDice()
+    public void MoveMore(bool isPair, int value)
     {
-        int dice1Value = Random.Range(1, 7);
-        int dice2Value = Random.Range(1, 7);
-        DiceManager.Instance.SetValueForDice(dice1Value, dice2Value);
-        Debug.Log($"Dice1: {dice1Value}, Dice2: {dice2Value}");
-        int value = dice1Value + dice2Value;
-        bool isPair = dice1Value == dice2Value;
         if (isPair) playerTasks.Push(PlayerTaskType.RollDice);
-        PlayerMovement.MoveWithDice(value, _occupiedTile.TileIndex, isPair, SetNewOccuiedTile);
+        PlayerMovement.MoveWithDice(value, _occupiedTile.TileIndex, SetNewOccuiedTile);
     }
     public void BuyProperty(int level)
     {
