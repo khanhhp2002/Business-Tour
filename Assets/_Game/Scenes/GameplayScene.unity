@@ -5769,17 +5769,6 @@ MonoBehaviour:
   _playerMovement: {fileID: 1326028992}
   _playerInput: {fileID: 1326028993}
   _playerColor: 0
-  _dice1Sprite: {fileID: 77485660}
-  _dice2Sprite: {fileID: 1607687227}
-  _diceSO: {fileID: 11400000, guid: 8b5ebcddf5cf9774baead9d681c6eb05, type: 2}
-  _currentDice:
-    _diceImageArray:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
 --- !u!114 &1326028992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6721,6 +6710,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1461114444}
+  - component: {fileID: 1461114445}
   m_Layer: 0
   m_Name: Dice
   m_TagString: Untagged
@@ -6745,6 +6735,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1461114445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1461114443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4418e660ba6261048ae26bc9d5f1833d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dice1Sprite: {fileID: 77485660}
+  _dice2Sprite: {fileID: 1607687227}
+  _diceSO: {fileID: 11400000, guid: 8b5ebcddf5cf9774baead9d681c6eb05, type: 2}
 --- !u!1 &1488843637
 GameObject:
   m_ObjectHideFlags: 0
